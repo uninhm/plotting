@@ -26,6 +26,7 @@ class Program:
         while not self.must_quit:
             self.loop()
 
+    # Linear interpolation between the points a and b
     def interpolate(self, a, b, t):
         x1, y1 = a
         x2, y2 = b
@@ -46,18 +47,6 @@ class Program:
                 q2 = self.interpolate(p2, p3, t)
                 b = self.interpolate(q1, q2, t)
                 pygame.draw.circle(self.window, 'black', b, radius=2)
-        """ Other way
-        for t in np.linspace(0, 1, 1_000):
-            q = self.points
-            while len(q) > 1:
-                new_q = []
-                for p1, p2 in zip(q, q[1:]):
-                    x1, y1 = p1
-                    x2, y2 = p2
-                    new_q.append((x1*(1-t) + x2*t, y1*(1-t) + y2*t))
-                q = new_q
-            pygame.draw.circle(self.window, 'black', q[0], radius=2)
-        """
 
     def handle_events(self):
         for event in pygame.event.get():
@@ -93,5 +82,5 @@ class Program:
         pygame.display.update()
 
 if __name__ == '__main__':
-    program = Program()
+    program = Program(600, 600)
     program.run()

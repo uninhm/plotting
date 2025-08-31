@@ -66,7 +66,7 @@ for n in sequence(N):
     circles.append(circle)
 
 # Save the animation to a file using matplotlib
-def save_animation():
+def save_animation(width, height):
     N_FRAMES = 600
 
     fig, ax = plt.subplots()
@@ -74,7 +74,7 @@ def save_animation():
     ax.set_aspect("equal")
     ax.grid(True)
 
-    ax.axis((0, 600, 0, 600))
+    ax.axis((0, width, 0, height))
     ax.yaxis.set_inverted(True)
 
     line, = ax.plot([], [])
@@ -147,10 +147,10 @@ while not program.must_quit:
     tw, th = text.get_size()
     window.blit(text, (ww-rw//2-tw//2, wh-rh//2-th//2))
 
-    # If button clicked save the save the animation with matplotlib
+    # If button clicked save the animation with matplotlib
     mouse_clicked, *_ = pygame.mouse.get_pressed()
     mouse_pos = pygame.mouse.get_pos()
     if mouse_clicked and btn.contains(mouse_pos, (0,0)):
-        save_animation()
+        save_animation(ww, wh)
 
     pygame.display.update()

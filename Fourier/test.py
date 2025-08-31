@@ -12,7 +12,7 @@ class Circle:
             self.center = parent.calc_tip(0)
         else:
             self.center = np.complex128(0, 0)
-        self.patch = plt.Circle((0, 0), radius=np.abs(self.coef), fill=False)
+        self.patch = patches.Circle((0, 0), radius=np.abs(self.coef), fill=False)
         self.line, = plt.plot([], [])
         self.update(0)
 
@@ -26,7 +26,7 @@ class Circle:
 
 def sequence(n):
     yield 0
-    for i in range(n+1):
+    for i in range(1, n+1):
         yield i
         yield -i
 

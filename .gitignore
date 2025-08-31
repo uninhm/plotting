@@ -3,3 +3,4 @@ uv.lock
 *.mp4
 *.png
 *.jpg
+__pycache__/

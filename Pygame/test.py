@@ -65,6 +65,7 @@ for n in sequence(N):
     circle = Circle(n, c[n], parent)
     circles.append(circle)
 
+# Save the animation to a file using matplotlib
 def save_animation():
     N_FRAMES = 600
 
@@ -107,7 +108,7 @@ def save_animation():
     plt.close()
 
 
-# Then we animate that
+# Then we animate the graph with pygame
 window = program.window
 program.must_quit = False
 start = time.time()
@@ -116,7 +117,10 @@ pygame.font.init()
 font = pygame.font.SysFont('Arial', 20)
 while not program.must_quit:
     program.handle_events()
+
     t = (time.time() - start)/10
+
+    # Animate the circles
     window.fill('white')
     for c in circles:
         if c.parent != None:
@@ -132,14 +136,21 @@ while not program.must_quit:
     line.append((tip.real, tip.imag))
     for p in line:
         pygame.draw.circle(window, 'green', p, 1)
+
+    # Display a button at the bottom right corner
     ww, wh = window.get_size()
     rw, rh = (100, 50)
     btn = pygame.draw.rect(window, 'red', (ww-rw, wh-rh, rw, rh))
+
+    # Center the text in the button
     text = font.render('Save', False, 'white')
     tw, th = text.get_size()
     window.blit(text, (ww-rw//2-tw//2, wh-rh//2-th//2))
+
+    # If button clicked save the save the animation with matplotlib
     mouse_clicked, *_ = pygame.mouse.get_pressed()
     mouse_pos = pygame.mouse.get_pos()
     if mouse_clicked and btn.contains(mouse_pos, (0,0)):
         save_animation()
+
     pygame.display.update()
